@@ -1,6 +1,6 @@
 FC = ifort
-FCFLAGS = -O3 -qopenmp
-LDFLAGS = -qopenmp -Wl,-stack_size,0x100000000 -lumfpack
+FCFLAGS = -O3 -qopenmp -fpconstant
+LDFLAGS = -qopenmp -L/home/int/kais/SuiteSparse/lib -lumfpack
 
 MOD = Parameters.o Globals.o umfpack.o Procedures.o 
 
@@ -11,6 +11,7 @@ OBJ = $(MOD) $(SUBR)
 
 Main: $(OBJ) Main.o
 	$(FC) $(LDFLAGS) -o $@ $^
+	./Main
 
 %.o: %.f90
 	$(FC) $(FCFLAGS) -c $<
